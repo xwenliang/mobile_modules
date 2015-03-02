@@ -9,13 +9,6 @@ var onlineDomain = '';
 var viewsOnlineDir = '';
 //线上环境的静态资源目录
 var staticOnlineDir = '';
-//去掉测试数据必须以<!--datastart-->开头 以<!--dataend-->结束
-var removeTestData = function(content){
-    content = content.replace(/\n/ig, '');
-    content = content.replace(/\>\s*/ig, '>');
-    content = content.replace(/\s*\</ig, '<');
-    return content.replace(/\<\!\-\-datastart\-\-\>[\s\S]*<\!\-\-dataend\-\-\>/ig, '');
-};
 
 fis.config.merge({
     statics: dir,
@@ -26,8 +19,7 @@ fis.config.merge({
         },
         postprocessor: {
             js: "jswrapper, require-async",
-            html: "require-async",
-            phtml: removeTestData
+            html: "require-async"
         },
         postpackager : ['autoload', 'simple'],
         optimizer: {

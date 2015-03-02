@@ -1,6 +1,5 @@
 
 /* 正/倒计时
- * @require
  * @param 	[cfg.toatl(num)]				需要计时多少秒
  * @param 	[cfg.step(num)]					计时步长(单位是s)
  * @param 	[cfg.toward(num)]				正向(1)倒向(-1)

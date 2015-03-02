@@ -1,5 +1,4 @@
 /*
- * @require Zepto,iScroll
  * @author zooble
  * @date 2015-2-5
  * @desc 下/上拉刷新

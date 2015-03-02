@@ -1,6 +1,5 @@
 
 /* 移动端弹层
- * @require Zepto
  * @param 	options.content(str)			窗体内容
  * @param 	[options.class(str)]			窗体class
  * @param 	[options.affect(str)]			弹层效果

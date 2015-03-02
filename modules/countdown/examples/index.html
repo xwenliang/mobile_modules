@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>正/倒计时</title>
+	<!--STYLE_PLACEHOLDER-->
+</head>
+<body>
+<div id="num">0</div>
+<button id="pause">pause</button>
+<button id="goon">goon</button>
+<button id="reset">reset</button>
+
+<script src="../../mod/mod.js"></script>
+<!--RESOURCEMAP_PLACEHOLDER-->
+<!--SCRIPT_PLACEHOLDER-->
+<script>
+	var $ = require('Zepto');
+	var countdown = require('countdown');
+	
+	var $num = $('#num');
+	var $pause = $('#pause');
+	var $goon = $('#goon');
+	var $reset = $('#reset');
+	var count = countdown({
+		total: 10,
+		toward: 1,
+		intervalCallback: function(cur){
+			$num.text(cur);
+		},
+		callback: function(num){
+			$num.text(num + '   stopped!');
+		}
+	});
+
+	$pause.click(function(){
+		count.stop();
+	});
+	$goon.click(function(){
+		count.continue();
+	});
+	$reset.click(function(){
+		count.reset();
+		$num.text(0);
+	});
+</script>
+</body>
+</html>
