@@ -3,24 +3,31 @@
 <head>
 	<meta charset="utf8">
 	<title>各种弹层</title>
+	<meta name="viewport" content="maximum-scale=3, minimum-scale=1, width=320, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
 	<!--STYLE_PLACEHOLDER-->
 </head>
 <body>
-
-
-
+<button id="btn1">点我弹出</button>
 <script src="../../mod/mod.js"></script>
 <!--RESOURCEMAP_PLACEHOLDER-->
 <!--SCRIPT_PLACEHOLDER-->
 <script>
+	var $ = require('Zepto');
 	var dialog = require('dialog');
-	var dia1 = dialog({
-		content: '<p>这是一个弹出层</p>',
-		class: 'dialog',//[弹出层自定义class]
-		affect: 'scale',//[弹出层效果]
-		closeCallback: function(){
-			console.log('弹出层关闭了');
-		}
+
+	var $btn1 = $('#btn1');
+	$btn1.click(function(){
+		var dia1 = dialog({
+			content: '<p class="abc">这是一个弹出层</p>',
+			class: 'dialog',//[弹出层自定义class]
+			affect: 'scale',//[弹出层效果]
+			topOffset: 0,
+			closeCallback: function(){
+				console.log('弹出层关闭了');
+			}
+		});
 	});
 	//关闭弹层
 	//dia1.close();

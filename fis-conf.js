@@ -90,7 +90,7 @@ fis.config.merge({
                 //非模块化的组件，如模块解析器
                 reg: /^\/modules\/mod\/mod\.js/i,
                 isMod: false,
-                release: '${statics}/temp/$&'
+                release: '${statics}/$&'
             },
             {
                 //公共组件
@@ -99,7 +99,7 @@ fis.config.merge({
                 isMod: true,
                 //id为文件夹名
                 id: '$1',
-                release: '${statics}/temp/$&'
+                release: '${statics}/$&'
             },
             {
                 //业务逻辑模块
