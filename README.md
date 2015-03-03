@@ -1,8 +1,6 @@
 # mobile_modules
 our commonly used modules based on FIS
 
----
-
 所有模块都需要用fis编译后才能查看demo，具体步骤（以countdown为例）：
 
 1、安装fis
