@@ -31,7 +31,8 @@ zRefresh.prototype = {
 		var me = this;
 		var myscroll = me.myscroll = new iscroll(me.opt.container, {
 			probeType: me.opt.probeType,
-			topOffset: -me.opt.distance
+			topOffset: -me.opt.distance,
+			click: true
 		});
 		myscroll.canExec = true;
 		myscroll.on('scrollStart', function(){
