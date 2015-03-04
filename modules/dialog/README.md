@@ -1,12 +1,57 @@
 ##移动端弹层
 
- ---
+###options.content
 
- * @param 	options.content(str)			窗体内容
- * @param 	[options.class(str)]			窗体class
- * @param 	[options.affect(str)]			弹层效果
- * @param 	[options.topOffset(num)]		弹层位置，默认居中
- * @param	[options.time(num)]				窗体自动关闭时间,null为不自动关闭
- * @param	[options.closeCallback(fn)]		窗体自动关闭后的回调
- * @affect: ['fade', 'scale', 'updown', 'downup']后两个暂未实现，可以自行到less文件写相对应的样式
+窗体内容
+
+默认值：`this is a test`
+
+
+###options.class
+
+窗体class，可以通过修改它来控制弹层样式
+
+默认值: `__default`
+
+
+###options.affect
+
+弹层效果，目前只写了scale和fade两种效果
+
+如果需要再拓展其它的效果，可以在dialog.less中添加
+
+如updown：
+
+可以在dialog.less中添加`xfis-updown`和`xfis-updown-close`两个类
+
+调用的时候，将`updown`传入即可。
+
+
+
+默认值：`scale`
+
+
+###options.topOffset
+
+弹层距离窗口顶端的位置，默认上下居中
+
+默认值：`0`
+
+
+###options.time
+
+弹层自动关闭的时间，默认不自动关闭
+
+默认值：`null`
+
+###options.closeCallback
+
+弹层关闭后的回调
+
+默认值：`null`
  
+
+
+
+
+
