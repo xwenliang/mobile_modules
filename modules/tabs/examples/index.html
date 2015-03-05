@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>tab切换</title>
+	<meta name="viewport" content="maximum-scale=3, minimum-scale=1, width=320, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<!--STYLE_PLACEHOLDER-->
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.cur{
+			background: red;
+			color: #fff;
+		}
+		.tab-cont div{
+			display: none;
+			font-size: 24px;
+			padding: 10px;
+		}
+		button{
+			padding: 5px 15px;
+			outline: medium;
+		}
+	</style>
+</head>
+<body>
+
+<div class="tab-parent">
+	<div class="tab-tit">
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+	</div>
+	<div class="tab-cont">
+		<div>1111111</div>
+		<div>2222222</div>
+		<div>3333333</div>
+	</div>
+</div>
+
+<div class="tab-parent">
+	<div class="tab-tit">
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+	</div>
+	<div class="tab-cont">
+		<div>1111111</div>
+		<div>2222222</div>
+		<div>3333333</div>
+	</div>
+</div>
+
+<script src="../../mod/mod.js"></script>
+<!--RESOURCEMAP_PLACEHOLDER-->
+<!--SCRIPT_PLACEHOLDER-->
+<script>
+	var $ = require('Zepto');
+	var tabs = require('tabs');
+
+	tabs({
+		tit: '.tab-tit>button',
+		cont: '.tab-cont>div',
+		par: '.tab-parent',
+		cur: 'cur',
+		index: 0,
+		callback: function($par, i){
+			console.log($par, i);
+		}
+	});
+</script>
+</body>
+</html>
