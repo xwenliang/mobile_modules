@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>上/下拉刷新</title>
+	<meta name="viewport" content="maximum-scale=3, minimum-scale=1, width=320, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<!--STYLE_PLACEHOLDER-->
+	<style>
+	html,body{
+		height: 100%;
+	}
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.scroller-wrap{
+		position: relative;
+		background: black;
+		height: 100%;
+		width: 100%;
+	}
+	section{
+		position: absolute;
+		display: none;
+		left: 0;
+		top: 0;
+		color: #fff;
+		font-size: 100px;
+		line-height: 200px;
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+
+<div class="scroller-wrap">
+	<section style="background: red;">1</section>
+	<section style="background: blue;">2</section>
+	<section style="background: purple;">3</section>
+	<section style="background: green;">4</section>
+	<section style="background: yellow;">5</section>
+</div>
+
+<script src="../../mod/mod.js"></script>
+<!--RESOURCEMAP_PLACEHOLDER-->
+<!--SCRIPT_PLACEHOLDER-->
+<script>
+	var $ = require('Zepto');
+	var scrollpage = require('scrollPageY');
+	var scroller = scrollpage({
+	    parent: '.scroller-wrap',
+	    section: 'section',
+	    stopScrollUp: 0,
+	    stopScrollDown: 0,
+	    beforecallback: function(){
+
+	    },
+	    aftercallback: function($cur){
+	    	console.log($cur);
+	    }
+	});
+</script>
+</body>
+</html>
