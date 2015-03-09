@@ -50,16 +50,20 @@
 	var $ = require('Zepto');
 	var scrollpage = require('scrollPageY');
 	var scroller = scrollpage({
-	    parent: '.scroller-wrap',
+		parent: '.scroller-wrap',
 	    section: 'section',
-	    stopScrollUp: 0,
-	    stopScrollDown: 0,
-	    beforecallback: function(){
-
+	    //可选
+	   	beforecallback: function(me){
+	    	console.log(me, me.$cur, me.$cur.text());
 	    },
-	    aftercallback: function($cur){
-	    	console.log($cur);
-	    }
+	    aftercallback: function(me){
+	    	console.log(me, me.$cur, me.$cur.text());
+	    },
+	    stopScrollUp: 0,//不允许向下滑动
+	    stopScrollDown: 0,//不允许向上滑动
+	    bonus: 40,//下拉多少距离后滚到下一屏
+	    scale: 0.8,//动画初始缩放大小
+	    time: 300//完成一屏滚动的耗时
 	});
 </script>
 </body>

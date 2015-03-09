@@ -15,7 +15,9 @@ var opt = {
     curIndex: 0,//当前滚动位置
     stopScrollUp: 0,//不允许向下滑动
     stopScrollDown: 0,//不允许向上滑动
-    scale: 0.5
+    bonus: 20,//下拉多少距离后滚到下一屏
+    scale: 0.5,//动画初始缩放大小
+    time: 300//完成一屏滚动的耗时
 };
 function scrollPageY(config){
     if(!(this instanceof scrollPageY)){
@@ -29,13 +31,14 @@ scrollPageY.prototype = {
         //合并参数
         this.opt = $.extend({}, opt, conf);
         this.pages = $(this.opt.parent).find(this.opt.section);
+        this.pages.hide();
         this.pages.eq(0).show();
         this.opt.total = this.pages.length;
         //将每一屏的大小，设为当前设备的尺寸
         this.setSectionSize(this.pages);
         this.registEvents();
         this.setScrollPos(this.pages.eq(this.opt.curIndex));
-        this.opt.aftercallback && this.opt.aftercallback(this.pages.eq(this.opt.curIndex));
+        this.opt.aftercallback && this.opt.aftercallback(this);
     },
     registEvents: function(){
         var me = this;
@@ -71,11 +74,11 @@ scrollPageY.prototype = {
             }
             me.isDrag = false;
             //下滑
-            if(me.touchmoveY - me.touchstartY > 20 && !opt.stopScrollUp && !opt.isScrolling){
+            if(me.touchmoveY - me.touchstartY > opt.bonus && !opt.stopScrollUp && !opt.isScrolling){
                 me.scrollUp();
             }
             //上滑
-            else if(me.touchmoveY - me.touchstartY < -20 && !opt.stopScrollDown && !opt.isScrolling){
+            else if(me.touchmoveY - me.touchstartY < -opt.bonus && !opt.stopScrollDown && !opt.isScrolling){
                 me.scrollDown();
             }
             else{
@@ -111,8 +114,8 @@ scrollPageY.prototype = {
             this.$prev = $el.prev();
         }
         this.$cur.css('z-index', 1);
-        this.$next.css('-webkit-transform', 'scale(0.5)');
-        this.$prev.css('-webkit-transform', 'scale(0.5)');
+        this.$next.css('-webkit-transform', 'scale('+opt.scale+')');
+        this.$prev.css('-webkit-transform', 'scale('+opt.scale+')');
     },
     scrollUp: function(){
         this.animate(this.screenSize.h);
@@ -129,8 +132,8 @@ scrollPageY.prototype = {
             return false;
         }
         me.opt.isScrolling = true;
-        me.opt.beforecallback && me.opt.beforecallback(tar > 0 ? me.$prev : me.$next);
-        this.$cur.animate({top: tar + 'px'}, 300, 'ease-out', function(){
+        me.opt.beforecallback && me.opt.beforecallback(me);
+        this.$cur.animate({top: tar + 'px'}, me.opt.time, 'ease-out', function(){
             me.opt.isScrolling = false;
             if(tar){
                 $(this).hide();
@@ -140,15 +143,15 @@ scrollPageY.prototype = {
                 });
                 me.$cur = tar > 0 ? me.$prev : me.$next;
                 me.setScrollPos(me.$cur);
-                me.opt.aftercallback && me.opt.aftercallback(me.$cur);
+                me.opt.aftercallback && me.opt.aftercallback(me);
 
             }
         });
         if(tar > 0){
-            this.$prev.css('display', 'block').animate({scale: 1}, 300, 'ease-out');
+            this.$prev.css('display', 'block').animate({scale: 1}, me.opt.time, 'ease-out');
         }
         else if(tar < 0){
-            this.$next.css('display', 'block').animate({scale: 1}, 300, 'ease-out');
+            this.$next.css('display', 'block').animate({scale: 1}, me.opt.time, 'ease-out');
         }
     },
     //跟随手指动画
@@ -156,8 +159,8 @@ scrollPageY.prototype = {
         var opt = this.opt;
         var $el = $(e.srcElement).closest(opt.section);
         var moveY =this.touchmoveY - this.touchstartY;
-        opt.scale = 0.5 + Math.abs(moveY/this.screenSize.h)/2;
-        opt.scale = opt.scale > 1 ? 1 : opt.scale;
+        var scale = opt.scale + (1 - opt.scale) * Math.abs(moveY/this.screenSize.h);
+        scale = scale > 1 ? 1 : scale;
         //下滑
         if(moveY > 0 && !opt.stopScrollUp){
             $el.css({
@@ -165,7 +168,7 @@ scrollPageY.prototype = {
                 'z-index': 1
             });
             this.$prev.show().css({
-                '-webkit-transform': 'scale('+opt.scale+')',
+                '-webkit-transform': 'scale('+scale+')',
                 '-webkit-transform-origin': '50% 0 0'
             });
             this.$next.hide();
@@ -177,7 +180,7 @@ scrollPageY.prototype = {
                 'z-index': 1
             });
             this.$next.show().css({
-                '-webkit-transform': 'scale('+opt.scale+')',
+                '-webkit-transform': 'scale('+scale+')',
                 '-webkit-transform-origin': '50% 100% 0'
             });
             this.$prev.hide();
