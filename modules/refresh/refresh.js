@@ -7,6 +7,7 @@
  * @param pullUpAction(fn)			上拉触发的函数
  * @param pullDownAction(fn)		下拉触发的函数
  * @param probeType(num)			scroll事件触发中探针的活跃度
+ * @param click(boolen)				iscroll的click属性
  */
 var $ = require('Zepto');
 var iscroll = require('iScroll');
@@ -16,7 +17,8 @@ var config = {
 	distance: 50,
 	pullUpAction: null,
 	pullDownAction: null,
-	probeType: 3
+	probeType: 3,
+	click: false
 };
 function zRefresh(opt){
 	if(!(this instanceof zRefresh)){
@@ -32,7 +34,7 @@ zRefresh.prototype = {
 		var myscroll = me.myscroll = new iscroll(me.opt.container, {
 			probeType: me.opt.probeType,
 			topOffset: -me.opt.distance,
-			click: true
+			click: me.opt.click
 		});
 		myscroll.canExec = true;
 		myscroll.on('scrollStart', function(){

@@ -48,7 +48,9 @@
 <div class="scroller-wrap">
 	<div class="scroller">
 		<div class="scroller-content">
-			1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+			1<br>1<br>1<br>1<br>1<br>1
+			<a href="http://baidu.com">baidu</a>
+			<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
 		</div>
 		<div class="down">下拉刷新</div>
 		<div class="up">上拉刷新</div>
@@ -61,12 +63,17 @@
 <script>
 	var $ = require('Zepto');
 	var refresh = require('refresh');
+	var fastclick = require('fastclick');
 	var $up = $('.up');
 	var $down = $('.down');
-
+	// $('a').click(function(){
+	// 	alert(111);
+	// 	return false;
+	// });
 	refresh({
 		container: '.scroller-wrap',
 		distance: 40,
+		click: true,
 		pullUpAction: function(scroller){
 			$up.text('加载中...');
 			//模拟加载过程
@@ -84,6 +91,7 @@
 			}, 1000);
 		}
 	});
+	//fastclick(document.body);
 </script>
 </body>
 </html>
