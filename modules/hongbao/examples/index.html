@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>领红包</title>
+	<meta name="viewport" content="maximum-scale=3, minimum-scale=1, width=320, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<!--STYLE_PLACEHOLDER-->
+</head>
+<body>
+<ul id="list"></div>
+<button id="packet_btn">领红包</button>
+
+<script src="../../mod/mod.js"></script>
+<!--RESOURCEMAP_PLACEHOLDER-->
+<!--SCRIPT_PLACEHOLDER-->
+<script>
+	var $ = require('Zepto');
+	var HongBao = require('hongbao')({
+		number : 20,    //20个红包
+		total : 500,    // 总金额 500元 ， 必选
+		maxValue : 50,  // 单个红包最大额度 2元，可选，默认1
+		minValue : 0.1, // 单个红包最小额度 0.1元， 可选，默认0.1
+		repeat : 3  
+	});
+	var $btn = $('#packet_btn'), $list = $('#list');
+	$btn.click(function(){
+		var packet = HongBao.getPacket();
+		if(!~packet){
+			$list.prePend('<li>抱歉！红包不够了~ </li>');
+			return false;
+		}
+		$list.prepend('<li>恭喜获得 ' + packet + ' 元红包一个！</li>');
+	});
+</script>
+</body>
+</html>
