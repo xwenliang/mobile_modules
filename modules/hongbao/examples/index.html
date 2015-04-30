@@ -9,8 +9,9 @@
 	<!--STYLE_PLACEHOLDER-->
 </head>
 <body>
-<ul id="list"></div>
 <button id="packet_btn">领红包</button>
+<div id="times" style="display:none;">已领取<span></span>次</div>
+<ul id="list"></div>
 
 <script src="../../mod/mod.js"></script>
 <!--RESOURCEMAP_PLACEHOLDER-->
@@ -18,17 +19,22 @@
 <script>
 	var $ = require('Zepto');
 	var HongBao = require('hongbao')({
-		number : 20,    //20个红包
-		total : 500,    // 总金额 500元 ， 必选
-		maxValue : 50,  // 单个红包最大额度 2元，可选，默认1
-		minValue : 0.1, // 单个红包最小额度 0.1元， 可选，默认0.1
-		repeat : 3  
+		count : 100,   //100个红包
+		total : 10,    // 总金额 10元 ， 必选
+		max : 1,  // 单个红包最大额度 1元，可选，默认1
+		min : 0.01, // 单个红包最小额度 0.01元， 可选，默认0.1
+		digit : 2 // 红包金额保留小数点后 2 位  
 	});
-	var $btn = $('#packet_btn'), $list = $('#list');
+	var $btn = $('#packet_btn'), $list = $('#list'), $times = $('#times'), $span = $times.find('span');;
+	var times = 0;
 	$btn.click(function(){
+		times++;
+		times === 1 && $times.show();
+		$span.html(times);
 		var packet = HongBao.getPacket();
 		if(!~packet){
-			$list.prePend('<li>抱歉！红包不够了~ </li>');
+			$span.css('color', 'red');
+			$list.prepend('<li>抱歉！红包不够了~ </li>');
 			return false;
 		}
 		$list.prepend('<li>恭喜获得 ' + packet + ' 元红包一个！</li>');
