@@ -26,13 +26,15 @@
 	var $goon = $('#goon');
 	var $reset = $('#reset');
 	var count = countdown({
+		interval: 10,
+		step: 0.01,
 		total: 10,
 		toward: 1,
 		intervalCallback: function(cur){
-			$num.text(cur);
+			$num.text(cur.toFixed(2));
 		},
 		callback: function(num){
-			$num.text(num + '   stopped!');
+			$num.text(num.toFixed(2) + '   stopped!');
 		}
 	});
 

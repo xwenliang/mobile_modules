@@ -2,14 +2,21 @@
 
 ###options.total
 
-需要计时多少秒
+需要计时多少秒(单位s)
 
 默认值：`60`
 
 
+###options.interval
+
+计时执行间隔(单位ms)
+
+默认值：`1000`
+
+
 ###options.step
 
-计时步长(单位s)
+计时执行间隔的步长(单位s)
 
 默认值: `1`
 
@@ -30,6 +37,6 @@
 
 ###options.intervalCallback
 
-每1s触发的回调
+每次计时执行触发的回调
 
 默认值：`null`

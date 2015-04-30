@@ -1,15 +1,17 @@
 
 /* 正/倒计时
  * @param 	[cfg.toatl(num)]				需要计时多少秒
- * @param 	[cfg.step(num)]					计时步长(单位是s)
+ * @param	[cfg.interval(num)]				计时执行间隔
+ * @param 	[cfg.step(num)]					计时执行间隔的步长
  * @param 	[cfg.toward(num)]				正向(1)倒向(-1)
  * @param 	[cfg.callback(fn)]				计时结束后的回调
- * @param 	[cfg.intervalCallback(fn)]		每1s触发的回调
+ * @param 	[cfg.intervalCallback(fn)]		每次计时执行触发的回调
  */
 'use strict';
 var $ = require('Zepto');
 var config = {
 	total: 60,
+	interval: 1000,
 	step: 1,
 	toward: 1,
 	callback: null,
@@ -47,7 +49,7 @@ Count.prototype.countdown = function(){
 			if(opt.toward > 0){
 				opt.cur += opt.step;
 				if(opt.cur >= opt.total){
-					opt.callback && opt.callback(opt.cur);
+					opt.callback && opt.callback(opt.total);
 					return false;
 				}
 			}
@@ -55,7 +57,7 @@ Count.prototype.countdown = function(){
 			else{
 				opt.cur -= opt.step;
 				if(opt.cur <= 0){
-					opt.callback && opt.callback(opt.cur);
+					opt.callback && opt.callback(0);
 					return false;
 				}
 			}
@@ -63,7 +65,7 @@ Count.prototype.countdown = function(){
 			opt.intervalCallback && opt.intervalCallback(opt.cur);
 			auto();
 
-		}, 1000);
+		}, opt.interval);
 	})();
 };
 Count.prototype.stop = function(){
