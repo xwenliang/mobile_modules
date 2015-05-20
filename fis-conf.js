@@ -2,7 +2,7 @@ var dir = '/mobile_modules';
 var domain = '';
 
 //fis.config.set('roadmap.relative', true);
-fis.config.set('settings.postpackager.simple.autoReflow', true);
+// fis.config.set('settings.postpackager.simple.autoReflow', true);
 fis.config.merge({
     statics: dir,
     /* zoo-command-install 要实现的功能
