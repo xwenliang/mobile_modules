@@ -64,21 +64,28 @@ scrollPageCube.prototype = {
 	},
 	beforeAction: function(){
 		var opt = this.opt;
+		opt.$box.removeClass('scroll-page-cube-tweening');
+
 		if(opt.curIndex < opt.$item.length - 1){
 			opt.$item.eq(opt.curIndex+1).css({
-				'-webkit-transform': 'rotateX(-90deg) translateZ(' + opt.size.h/2 + 'px)'
+				'-webkit-transform': 'rotateX('+ -90*(opt.curIndex+1) + 'deg) translateZ(' + opt.size.h/2 + 'px)',
+				'z-index': opt.curIndex + 1
 			});
 		}
+
+		// //应该显示最后面那个
+		// var rate = Math.floor(opt.curIndex/4);
+		// for(var i=0;i<rate;i++){
+		// 	opt.$item.eq(opt.curIndex%4 + i*4).css('display', 'none');
+		// }
+		// opt.$item.eq(opt.curIndex).css('display', 'block');
 	},
-	afterAction: function(){
-		this.opt.curIndex++;
-	},
+	afterAction: function(){},
 	followFinger: function(){
 		var opt = this.opt;
 		var me = this;
 		opt.$par.on({
 			touchstart: function(e){
-				opt.$box.removeClass('scroll-page-cube-tweening');
 				me.beforeAction();
 				this.movestart = {
 					x: e.touches[0].pageX,
@@ -91,40 +98,54 @@ scrollPageCube.prototype = {
 					y: e.touches[0].pageY - this.movestart.y
 				};
 				var trangle = {
-					x: -(this.moving.y/opt.size.h)*90 + 'deg',
-					y: (this.moving.x/opt.size.w)*30 + 'deg'//y轴要限制一下
+					x: -(this.moving.y/opt.size.h)*90 + opt.curIndex*90,
+					y: (this.moving.x/opt.size.w)*30//y轴要限制一下
 				};
 				//第一页
 				if(opt.curIndex === 0 && this.moving.y > 0){
 					trangle.x = 0;
+					opt.edge = true;
 				}
 				//最后一页
-				else if(opt.curIndex === opt.$item.length && this.moving.y < 0){
-					trangle.x = 0;
+				else if(opt.curIndex === opt.$item.length - 1 && this.moving.y < 0){
+					trangle.x = opt.curIndex*90;
+					opt.edge = true;
+				}
+				else{
+					opt.edge = false;
 				}
 
+				var rotateConf = {
+					'0': 'rotateY('+ trangle.y +'deg)',
+					'90': 'rotateZ(' + -trangle.y + 'deg)',
+					'180': 'rotateY(' + -trangle.y + 'deg)',
+					'270': 'rotateZ(' + trangle.y + 'deg)'
+				};
 				opt.$box.css(
 					'-webkit-transform', 'translateZ(-' + opt.size.h/2 + 'px) '
-										+'rotateX('+ trangle.x +') '
-										+'rotateY('+ trangle.y +')'
+										+'rotateX('+ trangle.x +'deg) '
+										+rotateConf[opt.curIndex%4*90]
 				);
 			},
 			touchend: function(e){
 				var moved = this.moving;
-				opt.$box.addClass('scroll-page-cube-tweening');
+				var triggered = false;
 				//未达到触发条件
-				// if(Math.abs(moved.y) < opt.bonus){
-
-				// }
-				// else{
-
-				// }
+				if(Math.abs(moved.y) < opt.bonus || opt.edge){
+					triggered = false;
+				}
+				//达到触发条件
+				else{
+					opt.curIndex -= moved.y/Math.abs(moved.y);
+					triggered = true;
+				}
+				opt.$box.addClass('scroll-page-cube-tweening');
 				opt.$box.css(
 					'-webkit-transform', 'translateZ(-' + opt.size.h/2 + 'px) '
-										+'rotateX(90deg) '
+										+'rotateX('+ opt.curIndex*90 +'deg) '
 										+'rotateY(0)'
 				);
-				me.afterAction();
+				me.afterAction(triggered);
 			}
 		});
 	},
