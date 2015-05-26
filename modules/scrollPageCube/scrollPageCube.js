@@ -145,6 +145,10 @@ scrollPageCube.prototype = {
 										+'rotateX('+ opt.curIndex*90 +'deg) '
 										+'rotateY(0)'
 				);
+				this.moving = {
+					x: 0,
+					y: 0
+				};
 				me.afterAction(triggered);
 			}
 		});
