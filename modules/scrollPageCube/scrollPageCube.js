@@ -62,6 +62,14 @@ scrollPageCube.prototype = {
 		}
 		return size;
 	},
+	getRotateYZ: function(angle){
+		return {
+			'0': 'rotateY('+ angle +'deg)',
+			'90': 'rotateZ(' + -angle + 'deg)',
+			'180': 'rotateY(' + -angle + 'deg)',
+			'270': 'rotateZ(' + angle + 'deg)'
+		}
+	},
 	beforeAction: function(){
 		var opt = this.opt;
 		opt.$box.removeClass('scroll-page-cube-tweening');
@@ -72,15 +80,19 @@ scrollPageCube.prototype = {
 				'z-index': opt.curIndex + 1
 			});
 		}
-
-		// //应该显示最后面那个
-		// var rate = Math.floor(opt.curIndex/4);
-		// for(var i=0;i<rate;i++){
-		// 	opt.$item.eq(opt.curIndex%4 + i*4).css('display', 'none');
-		// }
-		// opt.$item.eq(opt.curIndex).css('display', 'block');
 	},
-	afterAction: function(){},
+	afterAction: function(){
+		var opt = this.opt;
+		//只显示当前的一组三个
+		$.each(opt.$item, function(k, v){
+			if(k >= opt.curIndex-1 && k <= opt.curIndex+1){
+				$(v).css('display', 'block');
+			}
+			else{
+				$(v).css('display', 'none');
+			}
+		});
+	},
 	followFinger: function(){
 		var opt = this.opt;
 		var me = this;
@@ -115,12 +127,7 @@ scrollPageCube.prototype = {
 					opt.edge = false;
 				}
 
-				var rotateConf = {
-					'0': 'rotateY('+ trangle.y +'deg)',
-					'90': 'rotateZ(' + -trangle.y + 'deg)',
-					'180': 'rotateY(' + -trangle.y + 'deg)',
-					'270': 'rotateZ(' + trangle.y + 'deg)'
-				};
+				var rotateConf = me.getRotateYZ(trangle.y);
 				opt.$box.css(
 					'-webkit-transform', 'translateZ(-' + opt.size.h/2 + 'px) '
 										+'rotateX('+ trangle.x +'deg) '
@@ -129,27 +136,26 @@ scrollPageCube.prototype = {
 			},
 			touchend: function(e){
 				var moved = this.moving;
-				var triggered = false;
 				//未达到触发条件
 				if(Math.abs(moved.y) < opt.bonus || opt.edge){
-					triggered = false;
+
 				}
 				//达到触发条件
 				else{
 					opt.curIndex -= moved.y/Math.abs(moved.y);
-					triggered = true;
+
 				}
 				opt.$box.addClass('scroll-page-cube-tweening');
 				opt.$box.css(
 					'-webkit-transform', 'translateZ(-' + opt.size.h/2 + 'px) '
 										+'rotateX('+ opt.curIndex*90 +'deg) '
-										+'rotateY(0)'
+										+ me.getRotateYZ(0)[opt.curIndex%4*90]
 				);
 				this.moving = {
 					x: 0,
 					y: 0
 				};
-				me.afterAction(triggered);
+				me.afterAction();
 			}
 		});
 	},

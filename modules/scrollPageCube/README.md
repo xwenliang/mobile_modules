@@ -1,49 +1,22 @@
 ##3D上下滚屏模块
 
-###options.parent
+该模块的dom结构：
+
+	<div class="scroll-page-cube-perspective">
+		<div class="scroll-page-cube-box">
+			<div class="scroll-page-cube-item">1</div>
+			<div class="scroll-page-cube-item">2</div>
+			<div class="scroll-page-cube-item">3</div>
+			<div class="scroll-page-cube-item">4</div>
+			<div class="scroll-page-cube-left"></div>
+			<div class="scroll-page-cube-right"></div>
+		</div>
+	</div>
+
+###options.par
 
 滚屏模块的容器
 
-
-###options.section
-
-每一屏的容器
-
-
-###options.beforecallback
-
-发生滚屏之前会触发的回调
-
-###options.aftercallback
-
-发生滚屏完成之后会触发的回调
-
-###options.isScrolling
-
-是否处于切屏动画中
-
-###options.curIndex
-
-当前滚动索引
-
-
-###options.stopScrollUp
-
-不允许向下滑动
-
-
-###options.stopScrollDown
-
-不允许向上滑动
-
 ###options.bonus
 
-下拉多少距离后触发滚到下一屏
-
-###options.scale
-
-每一屏初始缩放大小
-
-###options.time
-
-完成一屏滚动的耗时
+触发滚屏的最小Y轴位移
