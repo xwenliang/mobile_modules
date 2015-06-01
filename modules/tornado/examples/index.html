@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>标签风暴</title>
+	<meta name="viewport" content="maximum-scale=3, minimum-scale=1, width=320, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<!--STYLE_PLACEHOLDER-->
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	html,body{
+		background: black;
+		width: 100%;
+		height: 100%;
+	}
+	.context{
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+	.context a{
+		opacity: 0;
+	}
+	</style>
+</head>
+<body>
+<div id="searchbox_page_content" class="context">
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+	<a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a><a></a>
+</div>
+
+<script src="../../mod/mod.js"></script>
+<!--RESOURCEMAP_PLACEHOLDER-->
+<!--SCRIPT_PLACEHOLDER-->
+<script>
+
+var $ = require('Zepto');
+var tornado = require('tornado');
+tornado({
+	elem: $('.context'),
+	tags: $('.context a')
+});
+
+</script>
+</body>
+</html>
