@@ -1,0 +1,32 @@
+.scroll-page-cube-perspective{
+	-webkit-perspective: 1000px;
+	width: 100%;
+	height: 100%;
+	.scroll-page-cube-box{
+		-webkit-transform-style: preserve-3d;
+		-webkit-transition: none;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		.scroll-page-cube-item{
+			-webkit-backface-visibility: hidden;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.scroll-page-cube-left,
+		.scroll-page-cube-right{
+			-webkit-backface-visibility: hidden;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			background: wheat;
+		}
+	}
+	.scroll-page-cube-tweening{
+		-webkit-transition: all 0.8s;
+	}
+}
