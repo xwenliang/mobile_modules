@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf8">
+	<title>数字滚动</title>
+	<meta name="viewport" content="maximum-scale=3, minimum-scale=1, width=320, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<!--STYLE_PLACEHOLDER-->
+</head>
+<body>
+	<div id="abc">0.00</div>
+
+	<script src="../../mod/mod.js"></script>
+	<!--RESOURCEMAP_PLACEHOLDER-->
+	<!--SCRIPT_PLACEHOLDER-->
+	<script>
+		var $ = require('Zepto');
+		var run = require('numRun');
+		run($('#abc'), 1250.0101, 15, 2);
+	</script>
+</body>
+</html>
