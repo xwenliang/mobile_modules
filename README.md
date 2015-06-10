@@ -10,5 +10,3 @@ our commonly used modules based on fis-zoo
 3、执行 ``zoo server start --type node --port 8080`` 打开fis-zoo提供的server
 
 4、访问 ``http://127.0.0.1:8080/mobile_modules/modules/countdown/examples``
-
-test branch3
