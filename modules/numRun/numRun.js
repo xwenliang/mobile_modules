@@ -6,15 +6,18 @@
  */
 
 var $ = require('Zepto');
+
+//支持带,的target
+var _target;
 function numRun($el, target, slices, digit){
-	var cur = parseFloat($el.text());
-	var step = parseFloat((target/slices).toFixed(digit));
+	var cur, step;
+	_target = _target || target;
+	target = target.split(',').join('');
+	cur = parseFloat($el.text().split(',').join(''));
+	step = parseFloat((target/slices).toFixed(digit));
 	//滚动数值太小
-	if( step*Math.pow(10, digit) < 1 ){
-		$el.text(target.toFixed(digit));
-		return false;
-	}
-	if( cur == target ){
+	if( step*Math.pow(10, digit) < 1 || cur >= target ){
+		$el.text(_target);
 		return false;
 	}
 
@@ -26,7 +29,7 @@ function numRun($el, target, slices, digit){
 			numRun($el, target, slices, digit);
 		}
 		else{
-			$el.text(target.toFixed(digit));
+			$el.text(_target);
 		}
 	}, 60);
 };
