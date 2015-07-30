@@ -32,12 +32,15 @@ scrollPageCube.prototype = {
 		//构建一个3d盒子，盒子的两个侧面应该是正方形
 		opt.size = this.getSize();
 		opt.$box.css({
+			//先将整个box的中心移到z轴 -h/2的地方，再将当前page移到z轴 0的地方，这样看上去旋转的各个page正好呈现在页面最前面
 			'-webkit-transform': 'translateZ(-' + opt.size.h/2 + 'px)'
 		});
 		opt.$left.css({
 			'width': opt.size.h + 'px',
+			//将该page的中心移至box的中心，再进行计算
 			'left': (opt.size.w - opt.size.h)/2 + 'px',
-			'-webkit-transform': 'rotateY(-90deg) translateZ('+ opt.size.w/2 +'px)'//旋转的时候，坐标轴也旋转了
+			//旋转的时候，坐标轴也旋转了
+			'-webkit-transform': 'rotateY(-90deg) translateZ('+ opt.size.w/2 +'px)'
 		});
 		opt.$right.css({
 			'width': opt.size.h + 'px',
