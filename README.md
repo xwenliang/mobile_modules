@@ -1,4 +1,4 @@
-# 已废弃，移步：[beefe/mobile_modules](https://github.com/beefe/mobile_modules)
+# mobile_modules
 our commonly used modules based on fis-zoo
 
 所有模块都需要用fis-zoo编译后才能查看demo，具体步骤（以countdown为例）：
